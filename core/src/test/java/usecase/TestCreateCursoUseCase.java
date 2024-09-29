@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -47,6 +48,7 @@ public class TestCreateCursoUseCase {
 
         when(myDB.existsCurso("Física nuclear")).thenReturn(false);
         Assertions.assertDoesNotThrow(() -> curso.createCurso("Física nuclear", CursoLevels.INICIAL, LocalDate.of(2025, 8, 15)));
+        Mockito.verify(myDB, Mockito.times(1)).existsCurso("Física nuclear");
     }
 
     @Test
