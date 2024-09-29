@@ -1,8 +1,9 @@
 package usecase;
 
-import curso.exception.ExceptionCursoWithASuscriptionDateInvalid;
+import curso.exception.ExceptionCursoWithAInvalidLevel;
+import curso.exception.ExceptionCursoWithAInscriptionDateInvalid;
+import curso.exception.ExceptionCursoWithMissingAttributes;
 import curso.exception.ExceptionCursoWithTheSameName;
-import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
 import curso.output.IPersistence;
 import curso.usecase.CursoCreateUseCase;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import java.lang.Object;
+
 import java.time.LocalDate;
 
 import static org.mockito.Mockito.when;
@@ -30,6 +31,7 @@ public class TestCreateCursoUseCase {
 
         Assertions.assertThrows(ExceptionCursoWithTheSameName.class
                 , () -> curso.createCurso("Matematicas", CursoLevels.INICIAL, LocalDate.of(2025, 8, 15)));
+
     }
 
     @Test
@@ -39,15 +41,51 @@ public class TestCreateCursoUseCase {
 
         Assertions.assertDoesNotThrow(() -> curso.createCurso("Lengua", CursoLevels.INICIAL, LocalDate.of(2025, 8, 15)));
     }
+    @Test
+    void CourseWithAllAttributesDoesNotThrowException() {
+        CursoCreateUseCase curso = new CursoCreateUseCase(myDB);
+
+        when(myDB.existsCurso("Física nuclear")).thenReturn(false);
+        Assertions.assertDoesNotThrow(() -> curso.createCurso("Física nuclear", CursoLevels.INICIAL, LocalDate.of(2025, 8, 15)));
+    }
 
     @Test
-    void CourseWithADateBeforeToCurrentDateThrowException(){
+    void CourseWithMissingAttributesThrowException() {
+        CursoCreateUseCase curso = new CursoCreateUseCase(myDB);
+        //when(myDB.existsCurso("Lengua")).thenReturn(false);
+        Assertions.assertThrows(ExceptionCursoWithMissingAttributes.class, () -> curso.createCurso(null, CursoLevels.INICIAL, LocalDate.of(2025, 8, 15)));
+    }
+
+
+    @Test
+    void CourseWithADateBeforeToTheCurrentDateThrowException(){
        CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
          //when(myDB.existsCurso("Programación")).thenReturn(false);
 
-         Assertions.assertThrows(ExceptionCursoWithASuscriptionDateInvalid.class,
+         Assertions.assertThrows(ExceptionCursoWithAInscriptionDateInvalid.class,
                  () -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2022, 8, 15)));
 
 
     }
+    @Test
+    void CourseWithADateBeforeToCurrentDateDoesNotThrowException(){
+        CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
+        //when(myDB.existsCurso("Programación")).thenReturn(false);
+
+        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024, 10, 1)));
+    }
+    @Test
+    void CourseWithALevelInvalidThrowException(){
+        CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
+        //when(myDB.existsCurso("Programación")).thenReturn(false);
+
+        Assertions.assertThrows(ExceptionCursoWithAInvalidLevel.class,() -> curso.createCurso("Programación", CursoLevels.SUPERSAYAYIN, LocalDate.of(2024, 10, 1)));
+    }
+    @Test
+    void CourseWithALevelInvalidDoesNotThrowException(){
+        CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
+
+        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024, 10, 1)));
+    }
+
 }

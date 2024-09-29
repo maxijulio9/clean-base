@@ -1,8 +1,9 @@
 package curso.modelo;
 
-import curso.exception.ExceptionCursoWithASuscriptionDateInvalid;
+import curso.exception.ExceptionCursoWithAInvalidLevel;
+import curso.exception.ExceptionCursoWithAInscriptionDateInvalid;
+import curso.exception.ExceptionCursoWithMissingAttributes;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -27,15 +28,22 @@ public class Curso {
     }
 
     public static Curso getInstance(String name, CursoLevels level, LocalDate dateExpirationInscription) {
+      //puedo agregar intefaz acá
         if (name ==null
                 || level  == null
                 || dateExpirationInscription ==null){
-            return null;
+            throw new ExceptionCursoWithMissingAttributes("Debes proporcionar todos los atributos del curso a registrar.");
         }
 
+        //Puedo agregaar interfaz acá
         if(dateExpirationInscription.isBefore(LocalDate.now())){
-            throw new ExceptionCursoWithASuscriptionDateInvalid("El curso que intentas registrar tiene fecha de inscripción inválida.");
+            throw new ExceptionCursoWithAInscriptionDateInvalid("El curso que intentas registrar tiene fecha de inscripción inválida.");
         }
+        //Puedo agregar interfaz acá
+        if (level != CursoLevels.INICIAL && level != CursoLevels.MEDIO && level != CursoLevels.AVANZADO ){
+            throw new ExceptionCursoWithAInvalidLevel("El curso que intentas registrar tiene un nivel inválido.");
+        }
+
 
         return new Curso(name,  level,dateExpirationInscription);
     }

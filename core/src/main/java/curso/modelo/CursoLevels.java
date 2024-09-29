@@ -1,5 +1,5 @@
 package curso.modelo;
 
 public enum CursoLevels {
-    INICIAL, MEDIO, AVANZADO;
+    INICIAL, MEDIO, AVANZADO, SUPERSAYAYIN;
 }
