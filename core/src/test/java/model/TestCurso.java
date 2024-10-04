@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestCurso {
 
+    //Sin MOCKITO
       @Test
       void TestAttributesAllMandatory () {
             Curso micurso = Curso.getInstance("Física", CursoLevels.INICIAL, LocalDate.of(2025,8,15));
