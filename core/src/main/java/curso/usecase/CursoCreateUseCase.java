@@ -2,7 +2,6 @@ package curso.usecase;
 
 import curso.exception.ExceptionCursoWithTheSameName;
 import curso.input.ICreateCursoInput;
-import curso.input.IValidationAttributeCursoInput;
 import curso.modelo.Curso;
 import curso.modelo.CursoFactory;
 import curso.modelo.CursoLevels;
@@ -12,18 +11,9 @@ import java.time.LocalDate;
 
 public class CursoCreateUseCase implements ICreateCursoInput {
     private IPersistence myDB;
-    private IValidationAttributeCursoInput cursoWithNullAttribute;
-    private IValidationAttributeCursoInput cursoWithInvalidExpirationDateInscription;
-    private IValidationAttributeCursoInput cursoWithInvalidLevel;
 
-    public CursoCreateUseCase(IPersistence myDB,
-                              IValidationAttributeCursoInput cursoWithNullAttribute,
-                              IValidationAttributeCursoInput cursoWithInvalidExpirationDateInscription,
-                              IValidationAttributeCursoInput cursoWithInvalidLevel) {
+    public CursoCreateUseCase(IPersistence myDB){
         this.myDB = myDB;
-        this.cursoWithNullAttribute = cursoWithNullAttribute;
-        this.cursoWithInvalidExpirationDateInscription = cursoWithInvalidExpirationDateInscription;
-        this.cursoWithInvalidLevel = cursoWithInvalidLevel;
     }
       //getInstance
         //Persistencia validar si existe antes de crear
@@ -33,8 +23,9 @@ public class CursoCreateUseCase implements ICreateCursoInput {
     public void createCurso(String name, CursoLevels level, LocalDate dateExpirationInscription) throws  ExceptionCursoWithTheSameName{
         //Curso curso = Curso.getInstance(name, level, dateExpirationInscription);
         //implementamos Factory mejor
-        CursoFactory cursoFactory = new CursoFactory(cursoWithNullAttribute,
-                                    cursoWithInvalidExpirationDateInscription,cursoWithInvalidLevel);
+        CursoFactory cursoFactory = new CursoFactory(new CursoWithNullAttributeValidatorUseCase()
+                                                    , new CursoWithInvalidExpirationDateInscriptionUseCase()
+                                                    , new CursoWithInvalidLevelUseCase());
 
         Curso curso = cursoFactory.createCursoFromFactory(name, level, dateExpirationInscription);
 

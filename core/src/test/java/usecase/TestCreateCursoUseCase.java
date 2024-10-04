@@ -24,6 +24,7 @@ public class TestCreateCursoUseCase {
     @Mock
     IPersistence myDB;
 
+
     @Test
     void CourseWithTheSameNameThrowException() {
         CursoCreateUseCase curso = new CursoCreateUseCase(myDB);
@@ -74,20 +75,20 @@ public class TestCreateCursoUseCase {
         CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
         //when(myDB.existsCurso("Programación")).thenReturn(false);
 
-        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024, 10, 1)));
+        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024, 10, 6)));
     }
     @Test
     void CourseWithALevelInvalidThrowException(){
         CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
         //when(myDB.existsCurso("Programación")).thenReturn(false);
 
-        Assertions.assertThrows(ExceptionCursoWithAInvalidLevel.class,() -> curso.createCurso("Programación", CursoLevels.SUPERSAYAYIN, LocalDate.of(2024, 10, 1)));
+        Assertions.assertThrows(ExceptionCursoWithAInvalidLevel.class,() -> curso.createCurso("Programación", CursoLevels.SUPERSAYAYIN, LocalDate.of(2024, 10, 6)));
     }
     @Test
     void CourseWithALevelInvalidDoesNotThrowException(){
         CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
 
-        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024, 10, 1)));
+        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024, 10, 6)));
     }
 
 }
