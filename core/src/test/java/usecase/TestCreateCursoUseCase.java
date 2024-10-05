@@ -4,6 +4,7 @@ import curso.exception.ExceptionCursoWithAInvalidLevel;
 import curso.exception.ExceptionCursoWithAInscriptionDateInvalid;
 import curso.exception.ExceptionCursoWithMissingAttributes;
 import curso.exception.ExceptionCursoWithTheSameName;
+import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
 import curso.output.IPersistence;
 import curso.usecase.CursoCreateUseCase;
@@ -28,12 +29,23 @@ public class TestCreateCursoUseCase {
     @Test
     void CourseWithTheSameNameThrowException() {
         CursoCreateUseCase curso = new CursoCreateUseCase(myDB);
-        when(myDB.existsCurso("Matematicas")).thenReturn(true);
 
+        when(myDB.existsCurso("Matematicas")).thenReturn(true);
 
         Assertions.assertThrows(ExceptionCursoWithTheSameName.class
                 , () -> curso.createCurso("Matematicas", CursoLevels.INICIAL, LocalDate.of(2025, 8, 15)));
 
+    }
+    @Test
+    void CourseCreatedCorrectly(){
+        CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
+
+        when(myDB.existsCurso("Programación")).thenReturn(false);
+
+        Curso cursito = curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024, 10, 6));
+
+
+        Assertions.assertEquals("Programación",cursito.getName());
     }
 
     @Test
@@ -90,5 +102,7 @@ public class TestCreateCursoUseCase {
 
         Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024, 10, 6)));
     }
+
+
 
 }
