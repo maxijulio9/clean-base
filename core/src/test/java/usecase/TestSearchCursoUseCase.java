@@ -28,7 +28,7 @@ public class TestSearchCursoUseCase {
 
     @Test
     public void testSearchCursoNotFoundIt() {
-        CursoSearchUsesCase searchCursoUseCase = new CursoSearchUseCase(myDB);
+        CursoSearchUseCase searchCursoUseCase = new CursoSearchUseCase(myDB);
         when(myDB.existsCurso("Criptografia")).thenReturn(false );
 
         Assertions.assertThrows(ExceptionCursonNonExistence.class,
