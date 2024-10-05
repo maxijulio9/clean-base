@@ -4,6 +4,6 @@ import curso.modelo.Curso;
 
 public interface IPersistence {
     boolean existsCurso(String name);
-    void saveCurso(Curso curso);
-    void searchCurso(String name);
+    boolean saveCurso(Curso curso);
+    Curso searchCurso(String name);
 }
