@@ -1,7 +1,6 @@
 package usecase;
 
 import curso.exception.ExceptionCursonNonExistence;
-import curso.modelo.Curso;
 import curso.output.IPersistence;
 import curso.usecase.CursoCreateUseCase;
 import curso.usecase.CursoSearchUseCase;
@@ -31,8 +30,6 @@ public class TestSearchCursoUseCase {
     public void testSearchCursoNotFoundIt() {
         CursoSearchUseCase searchCursoUseCase = new CursoSearchUseCase(myDB);
         when(myDB.existsCurso("Criptografia")).thenReturn(false );
-        //when(myDB.searchCurso("Criptografia")).thenThrow(ExceptionCursonNonExistence.class);
-
         Assertions.assertThrows(ExceptionCursonNonExistence.class,
                                 () -> searchCursoUseCase.searchCurso("Criptografia"));
     }
