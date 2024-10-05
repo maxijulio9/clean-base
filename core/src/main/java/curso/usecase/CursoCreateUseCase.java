@@ -20,7 +20,7 @@ public class CursoCreateUseCase implements ICreateCursoInput {
         //Persistencia si no existe, agregarlo.
 
     @Override
-    public void createCurso(String name, CursoLevels level, LocalDate dateExpirationInscription) throws  ExceptionCursoWithTheSameName{
+    public Curso createCurso(String name, CursoLevels level, LocalDate dateExpirationInscription) throws  ExceptionCursoWithTheSameName{
         //Curso curso = Curso.getInstance(name, level, dateExpirationInscription);
         //implementamos Factory mejor
         CursoFactory cursoFactory = new CursoFactory(new CursoWithNullAttributeValidatorUseCase()
@@ -35,6 +35,7 @@ public class CursoCreateUseCase implements ICreateCursoInput {
         }
         myDB.saveCurso(curso);
 
+        return curso;
     }
 
 }

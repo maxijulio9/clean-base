@@ -17,10 +17,10 @@ public class CursoSearchUseCase implements ISearchCursoInput {
     }
 
     @Override
-    public void searchCurso(String nameCurso) throws ExceptionCursonNonExistence {
+    public Curso searchCurso(String nameCurso) throws ExceptionCursonNonExistence {
 
         if (!myDB.existsCurso(nameCurso)) throw new ExceptionCursonNonExistence("No se encontraron resultados para '"+nameCurso+"'");
-        myDB.searchCurso(nameCurso);
+        return myDB.searchCurso(nameCurso);
     }
 
   /*
