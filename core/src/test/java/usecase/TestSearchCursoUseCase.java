@@ -3,7 +3,8 @@ package usecase;
 import curso.exception.ExceptionCursonNonExistence;
 import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
-import curso.output.IPersistence;
+import curso.output.IPersistenceCreation;
+import curso.output.IPersistenceSearch;
 import curso.usecase.CursoCreateUseCase;
 import curso.usecase.CursoSearchUseCase;
 import org.junit.jupiter.api.Assertions;
@@ -20,14 +21,16 @@ import static org.mockito.Mockito.when;
 public class TestSearchCursoUseCase {
 
     @Mock
-    IPersistence myDB;
+    IPersistenceSearch myDB;
+    @Mock
+    IPersistenceCreation myDBCreation;
 
     @Test
     public void testSearchCursoFoundIt() {
         CursoSearchUseCase searchCursoUseCase = new CursoSearchUseCase(myDB);
         when(myDB.existsCurso("Criptografia")).thenReturn(true);
 
-        Assertions.assertDoesNotThrow(() -> searchCursoUseCase.searchCurso("Criptografia"));
+        Assertions.assertDoesNotThrow(() -> searchCursoUseCase.getSingleCurso("Criptografia"));
     }
 
     @Test
@@ -36,18 +39,20 @@ public class TestSearchCursoUseCase {
         when(myDB.existsCurso("Criptografia")).thenReturn(false );
 
         Assertions.assertThrows(ExceptionCursonNonExistence.class,
-                                () -> searchCursoUseCase.searchCurso("Criptografia"));
+                                () -> searchCursoUseCase.getSingleCurso("Criptografia"));
     }
+
     @Test
     public void testSearchCursoFoundItByName() {
         CursoSearchUseCase searchCursoUseCase = new CursoSearchUseCase(myDB);
-        CursoCreateUseCase cursoCreateUseCase = new CursoCreateUseCase(myDB);
+        CursoCreateUseCase cursoCreateUseCase = new CursoCreateUseCase(myDBCreation);
+
         Curso cursito = cursoCreateUseCase.createCurso("Criptografia", CursoLevels.MEDIO, LocalDate.of(2025, 8, 15));
 
         when(myDB.existsCurso("Criptografia")).thenReturn(true);
-        when(myDB.searchCurso("Criptografia")).thenReturn(cursito);
+        when(myDB.getSingleCurso("Criptografia")).thenReturn(cursito);
 
-        Assertions.assertEquals(cursito.getName(), searchCursoUseCase.searchCurso("Criptografia").getName());
+        Assertions.assertEquals(cursito.getName(), searchCursoUseCase.getSingleCurso("Criptografia").getName());
     }
 
 }

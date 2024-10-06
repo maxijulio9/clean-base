@@ -5,7 +5,7 @@ import curso.exception.ExceptionCursoWithAInscriptionDateInvalid;
 import curso.exception.ExceptionCursoWithMissingAttributes;
 import curso.exception.ExceptionCursoWithTheSameName;
 import curso.modelo.CursoLevels;
-import curso.output.IPersistence;
+import curso.output.IPersistenceCreation;
 import curso.usecase.CursoCreateUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class TestCreateCursoUseCase {
 
     @Mock
-    IPersistence myDB;
+    IPersistenceCreation myDB;
 
 
     @Test

@@ -1,14 +1,13 @@
 package curso.input;
 
 import curso.modelo.Curso;
-import curso.modelo.CursoLevels;
 
-import java.time.LocalDate;
 import java.util.List;
 
-public interface ISearchCursoInput {
+public interface ISearchSingleCursoInput {
 
-    Curso searchCurso(String nameCurso);
+    Curso getSingleCurso(String nameCurso);
+    //Se separó por interfaces
     //Curso searchSingleCourse(String nameCurso);
 
 //    List<Curso> searchForCoursesThatMatchAString(String criteria);
