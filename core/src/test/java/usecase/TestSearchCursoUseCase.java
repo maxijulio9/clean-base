@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -102,6 +103,72 @@ public class TestSearchCursoUseCase {
 
         when(myDB.getCursoByLevel(CursoLevels.AVANZADO)).thenReturn(cursoList);
         Assertions.assertEquals("Auditoria", searchCursoUseCase.getCursoByLevel(CursoLevels.AVANZADO).get(0).getName());
+    }
+
+    @Test
+    public  void testSearchCursosThatMatchString(){
+        CursoSearchUseCase searchCursoUseCase = new CursoSearchUseCase(myDB);
+        CursoCreateUseCase cursoCreateUseCase = new CursoCreateUseCase(myDBCreation);
+        List<Curso> cursoList = Arrays.asList(
+                cursoCreateUseCase.createCurso("Criptografia", CursoLevels.MEDIO, LocalDate.of(2026, 10, 6)),
+                cursoCreateUseCase.createCurso("Auditoria", CursoLevels.MEDIO, LocalDate.of(2026, 10, 6))
+        );
+
+        cursoList = new ArrayList<>(cursoList);
+        cursoList.remove(0);
+        when(myDB.existsCurso("u")).thenReturn(true);
+        when(myDB.getCursoThatMatchString("u")).thenReturn(cursoList);
+
+        Assertions.assertEquals(1, searchCursoUseCase.getCursoThatMatchString("u").size());
+        Assertions.assertEquals("Auditoria", searchCursoUseCase.getCursoThatMatchString("u").get(0).getName());
+
+    }
+
+    @Test
+    public  void testSearchCursoBetweenTwoExpirationDate(){
+        CursoSearchUseCase searchCursoUseCase = new CursoSearchUseCase(myDB);
+        CursoCreateUseCase cursoCreateUseCase = new CursoCreateUseCase(myDBCreation);
+        List<Curso> cursoList = Arrays.asList(
+                cursoCreateUseCase.createCurso("Criptografia", CursoLevels.MEDIO, LocalDate.of(2026, 10, 6)),
+                cursoCreateUseCase.createCurso("Algebra", CursoLevels.AVANZADO, LocalDate.of(2028, 1, 6)),
+                cursoCreateUseCase.createCurso("Auditoria", CursoLevels.MEDIO, LocalDate.of(2026, 10, 6))
+        );
+
+        cursoList = new ArrayList<>(cursoList);
+        cursoList.remove(1);
+
+        LocalDate startDate = LocalDate.of(2025, 1, 6);
+        LocalDate endDate = LocalDate.of(2027, 1, 6);
+
+        when(myDB.getCursoBetweenTwoExpirationDate(startDate, endDate)).thenReturn(cursoList);
+
+        Assertions.assertEquals(2, searchCursoUseCase.getCursoBetweenTwoExpirationDate(startDate, endDate).size());
+        Assertions.assertEquals("Auditoria", searchCursoUseCase.getCursoBetweenTwoExpirationDate(startDate, endDate).get(1).getName());
+
+    }
+
+    @Test
+    public  void testSearchCursoByNameAndLevel(){
+        CursoSearchUseCase searchCursoUseCase = new CursoSearchUseCase(myDB);
+        CursoCreateUseCase cursoCreateUseCase = new CursoCreateUseCase(myDBCreation);
+        List<Curso> cursoList = Arrays.asList(
+                cursoCreateUseCase.createCurso("Criptografia", CursoLevels.MEDIO, LocalDate.of(2026, 10, 6)),
+                cursoCreateUseCase.createCurso("Criptografia", CursoLevels.MEDIO, LocalDate.of(2030 , 10, 6)),
+                cursoCreateUseCase.createCurso("Algebra", CursoLevels.AVANZADO, LocalDate.of(2028, 1, 6)),
+                cursoCreateUseCase.createCurso("Auditoria", CursoLevels.MEDIO, LocalDate.of(2026, 10, 6))
+        );
+
+        cursoList = new ArrayList<>(cursoList);
+        cursoList.remove(2);
+        cursoList.remove(2);
+
+
+        when(myDB.getCursoByNameAndByLevel("Criptografia", CursoLevels.MEDIO)).thenReturn(cursoList);
+
+        Assertions.assertEquals(2, searchCursoUseCase.getCursoByNameAndByLevel("Criptografia", CursoLevels.MEDIO).size());
+
+        Assertions.assertEquals("Criptografia", searchCursoUseCase.getCursoByNameAndByLevel("Criptografia", CursoLevels.MEDIO).get(1).getName());
+
     }
 
 }
