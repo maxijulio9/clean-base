@@ -75,20 +75,20 @@ public class TestCreateCursoUseCase {
         CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
         //when(myDB.existsCurso("Programación")).thenReturn(false);
 
-        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024, 10, 6)));
+        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2030, 10, 6)));
     }
     @Test
     void CourseWithALevelInvalidThrowException(){
         CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
         //when(myDB.existsCurso("Programación")).thenReturn(false);
 
-        Assertions.assertThrows(ExceptionCursoWithAInvalidLevel.class,() -> curso.createCurso("Programación", CursoLevels.SUPERSAYAYIN, LocalDate.of(2024, 10, 6)));
+        Assertions.assertThrows(ExceptionCursoWithAInvalidLevel.class,() -> curso.createCurso("Programación", CursoLevels.SUPERSAYAYIN, LocalDate.of(2034, 10, 6)));
     }
     @Test
     void CourseWithALevelInvalidDoesNotThrowException(){
         CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
 
-        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024, 10, 6)));
+        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2044, 10, 6)));
     }
 
 }
