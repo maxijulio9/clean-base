@@ -29,24 +29,24 @@ public class CursoSearchUseCase{// implements ISearchSingleCursoInput, ISearchFo
         return myDB.getSingleCurso(nameCurso);
     }
 
-    public Collection<Curso> getAllCursos() {
+    public List<Curso> getAllCursos() {
         return myDB.getAllCursos();
     }
 
-    public Collection<Curso> getCursoThatMatchString(String nameCurso) {
+    public List<Curso> getCursoThatMatchString(String nameCurso) {
         if (!myDB.existsCurso(nameCurso)) throw new ExceptionCursonNonExistence("No se encontraron resultados para '"+nameCurso+"'");
         return myDB.getCursoThatMatchString(nameCurso);
     }
 
-    public Collection<Curso> getCursoByLevel(CursoLevels level) {
+    public List<Curso> getCursoByLevel(CursoLevels level) {
         return myDB.getCursoByLevel(level);
     }
 
-    public Collection<Curso> getCursoByNameAndByLevel(String nameCurso, CursoLevels level) {
+    public List<Curso> getCursoByNameAndByLevel(String nameCurso, CursoLevels level) {
         return myDB.getCursoByNameAndByLevel(nameCurso, level);
     }
 
-    public Collection<Curso> getCursoBetweenTwoExpirationDate(LocalDate startDate, LocalDate endDate) {
+    public List<Curso> getCursoBetweenTwoExpirationDate(LocalDate startDate, LocalDate endDate) {
         return myDB.getCursoBetweenTwoExpirationDate(startDate, endDate);
     }
 

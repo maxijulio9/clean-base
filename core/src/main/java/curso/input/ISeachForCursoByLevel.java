@@ -4,7 +4,8 @@ import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface ISeachForCursoByLevel {
-    Collection<Curso> getCursoByLevel(CursoLevels level);
+    List<Curso> getCursoByLevel(CursoLevels level);
 }

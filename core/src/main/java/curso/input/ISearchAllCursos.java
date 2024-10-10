@@ -3,7 +3,8 @@ package curso.input;
 import curso.modelo.Curso;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface ISearchAllCursos  {
-    Collection<Curso> getCursos();
+    List<Curso> getCursos();
 }
