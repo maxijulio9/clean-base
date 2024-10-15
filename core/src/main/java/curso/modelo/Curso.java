@@ -52,5 +52,21 @@ public class Curso {
     public void setName(String name) {
         this.name = name;
     }
+
+    public LocalDate getDateExpirationInscription() {
+        return dateExpirationInscription;
+    }
+
+    public void setDateExpirationInscription(LocalDate dateExpirationInscription) {
+        this.dateExpirationInscription = dateExpirationInscription;
+    }
+
+    public CursoLevels getLevel() {
+        return level;
+    }
+
+    public void setLevel(CursoLevels level) {
+        this.level = level;
+    }
 }
 //
