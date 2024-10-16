@@ -5,7 +5,6 @@ import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
 import curso.output.IPersistenceCreation;
 import curso.output.IPersistenceSearch;
-import curso.usecase.CursoCreateUseCase;
 import curso.usecase.CursoSearchUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,9 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

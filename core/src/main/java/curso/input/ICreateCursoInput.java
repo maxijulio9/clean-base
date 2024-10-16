@@ -7,5 +7,4 @@ import java.time.LocalDate;
 
 public interface ICreateCursoInput {
     Curso createCurso(String name, CursoLevels level, LocalDate dateExpiritInscription);
-
 }
