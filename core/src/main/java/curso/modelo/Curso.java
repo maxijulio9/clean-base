@@ -31,8 +31,10 @@ public class Curso {
     }
 
     public static Curso getInstance(String name, CursoLevels level, LocalDate dateExpirationInscription) {
-
-       return new Curso(name,  level,dateExpirationInscription);
+        Util.validatedateExpirationInscription(dateExpirationInscription,"El curso que intentas registrar tiene fecha de inscripción inválida." );
+        Util.validateEmptyString(name, "El nombre del curso no puede estar vacío.");
+        Util.validateLevel(level, "El curso que intentas registrar tiene un nivel inválido.");
+        return new Curso(name,  level,dateExpirationInscription);
     }
 
     public UUID getId() {
