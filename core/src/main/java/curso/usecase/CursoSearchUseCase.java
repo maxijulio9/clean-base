@@ -14,18 +14,25 @@ import java.util.List;
 
 public class CursoSearchUseCase{// implements ISearchSingleCursoInput, ISearchForCursoThatMatchString, ISeachForCursoByLevel {
 
+    private CursoValidationService cursoValidationService;
     private IPersistenceSearch myDB;
+
     public CursoSearchUseCase(IPersistenceSearch persistence){
         this.myDB = persistence;
+        this.cursoValidationService = new CursoValidationService(persistence);
     }
 
     public Curso getSingleCurso(String nameCurso) throws ExceptionCursonNonExistence {
 
+        /*
+        delegupé responsabilidad a la clase servicio
         if (!myDB.existsCurso(nameCurso)) {
             System.out.println("El curso no existe");
             throw new ExceptionCursonNonExistence("No se encontraron resultados para '" + nameCurso + "'");
 
         }
+         */
+        cursoValidationService.validateCursoExistence(nameCurso);
         return myDB.getSingleCurso(nameCurso);
     }
 
@@ -34,7 +41,8 @@ public class CursoSearchUseCase{// implements ISearchSingleCursoInput, ISearchFo
     }
 
     public List<Curso> getCursoThatMatchString(String nameCurso) {
-        if (!myDB.existsCurso(nameCurso)) throw new ExceptionCursonNonExistence("No se encontraron resultados para '"+nameCurso+"'");
+        //if (!myDB.existsCurso(nameCurso)) throw new ExceptionCursonNonExistence("No se encontraron resultados para '"+nameCurso+"'");
+        cursoValidationService.validateCursoExistence(nameCurso);
         return myDB.getCursoThatMatchString(nameCurso);
     }
 
@@ -51,14 +59,6 @@ public class CursoSearchUseCase{// implements ISearchSingleCursoInput, ISearchFo
     }
 
     /*
-
-    //Wstos metodos son de capa presentación mepa
-        @Override
-        public Curso searchSingleCourse(String nameCurso) {
-
-            return null;
-        }
-
 
     @Override
     public List<Curso> searchCoursesByExpirationDateInscription(LocalDate expirationDate) {
