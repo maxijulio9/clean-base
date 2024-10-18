@@ -33,9 +33,12 @@ public class CursoCreateUseCase implements ICreateCursoInput {
 
         Curso curso = cursoFactory.createCursoFromFactory(name, level, dateExpirationInscription);
          */
-        Util.validatedateExpirationInscription(dateExpirationInscription,"El curso que intentas registrar tiene fecha de inscripción inválida." );
+        //Aca validaciones llevar a entidad Curso
+       /* Util.validatedateExpirationInscription(dateExpirationInscription,"El curso que intentas registrar tiene fecha de inscripción inválida." );
         Util.validateEmptyString(name, "El nombre del curso no puede estar vacío.");
         Util.validateLevel(level, "El curso que intentas registrar tiene un nivel inválido.");
+
+        */
       //innecesario  Util.validateNullAtributteExistence(level, dateExpirationInscription, "Debés proporcionar todos los atributos del curso a registrar.");
 
         Curso curso =  Curso.getInstance(name, level, dateExpirationInscription);
