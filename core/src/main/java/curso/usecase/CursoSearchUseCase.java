@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
-public class CursoSearchUseCase{// implements ISearchSingleCursoInput, ISearchForCursoThatMatchString, ISeachForCursoByLevel {
+public class CursoSearchUseCase{
 
     private CursoValidationService cursoValidationService;
     private IPersistenceSearch myDB;
@@ -34,7 +34,6 @@ public class CursoSearchUseCase{// implements ISearchSingleCursoInput, ISearchFo
     }
 
     public List<Curso> getCursoThatMatchString(String nameCurso) {
-        //if (!myDB.existsCurso(nameCurso)) throw new ExceptionCursonNonExistence("No se encontraron resultados para '"+nameCurso+"'");
         cursoValidationService.validateCursoExistence(nameCurso);
         return myDB.getCursoThatMatchString(nameCurso);
     }
@@ -51,12 +50,5 @@ public class CursoSearchUseCase{// implements ISearchSingleCursoInput, ISearchFo
         return myDB.getCursoBetweenTwoExpirationDate(startDate, endDate);
     }
 
-    /*
-
-    @Override
-    public List<Curso> searchCoursesByExpirationDateInscription(LocalDate expirationDate) {
-        return List.of();
-    }
-
- */
+  
 }
