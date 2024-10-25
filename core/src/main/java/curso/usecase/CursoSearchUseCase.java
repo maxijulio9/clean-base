@@ -22,18 +22,11 @@ public class CursoSearchUseCase{// implements ISearchSingleCursoInput, ISearchFo
         this.cursoValidationService = new CursoValidationService(persistence);
     }
 
-    public Curso getSingleCurso(String nameCurso) throws ExceptionCursonNonExistence {
+    @Override
+    public Curso searchCurso(String nameCurso) throws ExceptionCursonNonExistence {
 
-        /*
-        delegupé responsabilidad a la clase servicio
-        if (!myDB.existsCurso(nameCurso)) {
-            System.out.println("El curso no existe");
-            throw new ExceptionCursonNonExistence("No se encontraron resultados para '" + nameCurso + "'");
-
-        }
-         */
-        cursoValidationService.validateCursoExistence(nameCurso);
-        return myDB.getSingleCurso(nameCurso);
+        if (!myDB.existsCurso(nameCurso)) throw new ExceptionCursonNonExistence("No se encontraron resultados para '"+nameCurso+"'");
+        return myDB.searchCurso(nameCurso);
     }
 
     public List<Curso> getAllCursos() {

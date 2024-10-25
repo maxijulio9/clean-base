@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ISearchCursoInput {
 
-    void searchCurso(String nameCurso);
+    Curso searchCurso(String nameCurso);
     //Curso searchSingleCourse(String nameCurso);
 
 //    List<Curso> searchForCoursesThatMatchAString(String criteria);

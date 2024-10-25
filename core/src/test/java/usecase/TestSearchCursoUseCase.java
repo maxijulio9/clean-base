@@ -3,8 +3,9 @@ package usecase;
 import curso.exception.ExceptionCursonNonExistence;
 import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
-import curso.output.IPersistenceCreation;
-import curso.output.IPersistenceSearch;
+
+import curso.output.IPersistence;
+import curso.usecase.CursoCreateUseCase;
 import curso.usecase.CursoSearchUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,10 +15,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 
-import static org.mockito.Mockito.*;
+
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TestSearchCursoUseCase {
@@ -260,6 +260,17 @@ public class TestSearchCursoUseCase {
         Assertions.assertEquals( CursoLevels.AVANZADO, searchCursoUseCase.getCursoByNameAndByLevel("B", CursoLevels.AVANZADO).get(0).getLevel());
 
         Mockito.verify(myDB, Mockito.times(5)).getCursoByNameAndByLevel("Criptografia", CursoLevels.MEDIO);
+    }
+    @Test
+    public void testSearchCursoFoundItByName() {
+        CursoSearchUseCase searchCursoUseCase = new CursoSearchUseCase(myDB);
+        CursoCreateUseCase cursoCreateUseCase = new CursoCreateUseCase(myDB);
+        Curso cursito = cursoCreateUseCase.createCurso("Criptografia", CursoLevels.MEDIO, LocalDate.of(2025, 8, 15));
+
+        when(myDB.existsCurso("Criptografia")).thenReturn(true);
+        when(myDB.searchCurso("Criptografia")).thenReturn(cursito);
+
+        Assertions.assertEquals(cursito.getName(), searchCursoUseCase.searchCurso("Criptografia").getName());
     }
 
 }
