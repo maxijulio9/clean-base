@@ -13,7 +13,7 @@ public class CursoWithNullAttributeValidatorUseCase implements IValidationAttrib
         if (name ==null
                 || level  == null
                 || dateExpirationInscription ==null){
-            throw new ExceptionCursoWithMissingAttributes("Debes proporcionar todos los atributos del curso a registrar.");
+            throw new ExceptionCursoWithMissingAttributes("Debés proporcionar todos los atributos del curso a registrar.");
         }
     }
 }
