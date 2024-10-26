@@ -6,29 +6,25 @@ import curso.input.ICreateCursoInput;
 import curso.modelo.Curso;
 import curso.modelo.CursoFactory;
 import curso.modelo.CursoLevels;
+import curso.modelo.Util;
 import curso.output.IPersistence;
+import curso.output.IPersistenceCreation;
 
 import java.time.LocalDate;
 
 public class CursoCreateUseCase implements ICreateCursoInput {
-    private IPersistence myDB;
+    private IPersistenceCreation myDB;
 
-    public CursoCreateUseCase(IPersistence myDB){
+    public CursoCreateUseCase(IPersistenceCreation myDB){
         this.myDB = myDB;
     }
-      //getInstance
-        //Persistencia validar si existe antes de crear
-        //Persistencia si no existe, agregarlo.
+  
 
     @Override
-    public Curso createCurso(String name, CursoLevels level, LocalDate dateExpirationInscription) throws  ExceptionCursoWithTheSameName{
-        //Curso curso = Curso.getInstance(name, level, dateExpirationInscription);
-        //implementamos Factory mejor
-        CursoFactory cursoFactory = new CursoFactory(new CursoWithNullAttributeValidatorUseCase()
-                                                    , new CursoWithInvalidExpirationDateInscriptionUseCase()
-                                                    , new CursoWithInvalidLevelUseCase());
+    public Curso createCurso(String name, CursoLevels level, LocalDate dateExpirationInscription) throws  RuntimeException{
+     
 
-        Curso curso = cursoFactory.createCursoFromFactory(name, level, dateExpirationInscription);
+        Curso curso =  Curso.getInstance(name, level, dateExpirationInscription);
 
 
         if (myDB.existsCurso(curso.getName())){
