@@ -8,13 +8,14 @@ import curso.modelo.CursoFactory;
 import curso.modelo.CursoLevels;
 import curso.modelo.Util;
 import curso.output.IPersistence;
+import curso.output.IPersistenceCreation;
 
 import java.time.LocalDate;
 
 public class CursoCreateUseCase implements ICreateCursoInput {
-    private IPersistence myDB;
+    private IPersistenceCreation myDB;
 
-    public CursoCreateUseCase(IPersistence myDB){
+    public CursoCreateUseCase(IPersistenceCreation myDB){
         this.myDB = myDB;
     }
   

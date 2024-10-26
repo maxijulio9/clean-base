@@ -1,7 +1,8 @@
 package curso.usecase;
 
 import curso.exception.ExceptionCursonNonExistence;
-import curso.input.ISeachForCursoByLevel;
+import curso.input.ISearchCursoInput;
+import curso.input.ISearchForCursoByLevel;
 import curso.input.ISearchForCursoThatMatchString;
 import curso.input.ISearchSingleCursoInput;
 import curso.modelo.Curso;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
-public class CursoSearchUseCase{
+public class CursoSearchUseCase implements ISearchCursoInput {
 
     private CursoValidationService cursoValidationService;
     private IPersistenceSearch myDB;
@@ -26,7 +27,10 @@ public class CursoSearchUseCase{
     public Curso searchCurso(String nameCurso) throws ExceptionCursonNonExistence {
 
         if (!myDB.existsCurso(nameCurso)) throw new ExceptionCursonNonExistence("No se encontraron resultados para '"+nameCurso+"'");
-        return myDB.searchCurso(nameCurso);
+        return myDB.getSingleCurso(nameCurso);
+    }
+    public Curso getSingleCurso(String nameCurso) throws ExceptionCursonNonExistence {
+        return searchCurso(nameCurso);
     }
 
     public List<Curso> getAllCursos() {
