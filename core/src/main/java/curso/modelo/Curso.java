@@ -12,10 +12,7 @@ import java.util.UUID;
 public class Curso {
     UUID id;
     String name;
- //   Integer studentQuantity;
-   // Integer hoursQuantity;
     CursoLevels level;
-    //String teacherAssigned;
     LocalDate dateExpirationInscription;
 
   //  ICreateCursoInput cursoCreateInput;
@@ -23,10 +20,7 @@ public class Curso {
     private Curso(String name,  CursoLevels levels, LocalDate dateCloseInscription ){
         this.id = UUID.randomUUID();
         this.name = name;
-        //this.studentQuantity = studentQuantity;
-        //this.hoursQuantity = hoursQuantity;
         this.level = levels;
-        //this.teacherAssigned = teacherAssigned;
         this.dateExpirationInscription = dateCloseInscription;
     }
 

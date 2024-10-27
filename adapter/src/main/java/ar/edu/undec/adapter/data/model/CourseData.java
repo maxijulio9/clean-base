@@ -1,0 +1,62 @@
+package ar.edu.undec.adapter.data.model;
+
+import curso.input.ICreateCursoInput;
+import curso.modelo.CursoLevels;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+@Entity(name = "cursos")
+public class CourseData {
+
+    @Id
+    @Column(name="idcurso")
+    UUID id;
+
+    @Column(name="name")
+    String name;
+    @Column(name="level")
+    CursoLevels level;
+    @Column(name="dateexpirationinscriptioncourse")
+    LocalDate dateExpirationInscription;
+
+    public CourseData() {
+
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CursoLevels getLevel() {
+        return level;
+    }
+
+    public void setLevel(CursoLevels level) {
+        this.level = level;
+    }
+
+    public LocalDate getDateExpirationInscription() {
+        return dateExpirationInscription;
+    }
+
+    public void setDateExpirationInscription(LocalDate dateExpirationInscription) {
+        this.dateExpirationInscription = dateExpirationInscription;
+    }
+
+}
