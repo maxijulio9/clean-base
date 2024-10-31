@@ -1,13 +1,9 @@
 package curso.usecase;
 
-import curso.exception.ExceptionCursoErrorInPersistence;
 import curso.exception.ExceptionCursoWithTheSameName;
 import curso.input.ICreateCursoInput;
 import curso.modelo.Curso;
-import curso.modelo.CursoFactory;
 import curso.modelo.CursoLevels;
-import curso.modelo.Util;
-import curso.output.IPersistence;
 import curso.output.IPersistenceCreation;
 
 import java.time.LocalDate;

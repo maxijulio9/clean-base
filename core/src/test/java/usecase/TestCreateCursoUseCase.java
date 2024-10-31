@@ -3,7 +3,6 @@ package usecase;
 import curso.exception.*;
 import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
-import curso.output.IPersistence;
 import curso.output.IPersistenceCreation;
 import curso.usecase.CursoCreateUseCase;
 import org.junit.jupiter.api.Assertions;

@@ -26,6 +26,13 @@ public class CourseData {
     public CourseData() {
 
     }
+    public CourseData(UUID id, String name, CursoLevels level, LocalDate dateExpirationInscription) {
+        this.id = id;
+        this.name = name;
+        this.level = level;
+        this.dateExpirationInscription = dateExpirationInscription;
+    }
+
 
     public UUID getId() {
         return id;

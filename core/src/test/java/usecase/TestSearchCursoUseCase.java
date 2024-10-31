@@ -4,10 +4,8 @@ import curso.exception.ExceptionCursonNonExistence;
 import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
 
-import curso.output.IPersistence;
 import curso.output.IPersistenceCreation;
 import curso.output.IPersistenceSearch;
-import curso.usecase.CursoCreateUseCase;
 import curso.usecase.CursoSearchUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
