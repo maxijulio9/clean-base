@@ -20,17 +20,17 @@ public class CreateCourseController {
 
     @PostMapping
     public ResponseEntity<?> createCourse(@RequestBody CourseDTO courseDTO) {
-        Curso courseCreated = createCursoInput.createCurso(
-                courseDTO.getId(),
-                courseDTO.getName(),
-                courseDTO.getLevel(),
-                courseDTO.getDateExpirationInscription()
-        );
 
-        if(courseCreated.getName() != null ) {
+        try {
+            Curso courseCreated = createCursoInput.createCurso(
+                    courseDTO.getId(),
+                    courseDTO.getName(),
+                    courseDTO.getLevel(),
+                    courseDTO.getDateExpirationInscription()
+            );
             return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.badRequest().build();
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }
