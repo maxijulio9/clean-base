@@ -27,7 +27,7 @@ public class CreateCourseController {
                 courseDTO.getDateExpirationInscription()
         );
 
-        if(courseCreated.getName() != null ) {
+        if(courseCreated != null ) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.badRequest().build();
