@@ -4,8 +4,9 @@ import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public interface ICreateCursoInput {
-    Curso createCurso(String name, CursoLevels level, LocalDate dateExpiritInscription);
+    Curso createCurso(UUID id, String name, CursoLevels level, LocalDate dateExpiritInscription);
 
 }

@@ -1,6 +1,7 @@
 package ar.edu.undec.adapter.service.bootstrap;
 
 import curso.input.ICreateCursoInput;
+import curso.output.IPersistenceCreation;
 import curso.usecase.CursoCreateUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class UseCaseConfig {
 
     @Bean
-    public ICreateCursoInput createCourseInput(CreateCourseGateway repository){
-        return new CursoCreateUseCase(repository);
+    public ICreateCursoInput createCourseInput(IPersistenceCreation myDB){
+        return new CursoCreateUseCase(myDB);
 
     }
 
