@@ -30,8 +30,8 @@ public class CourseSearchDBImplementation implements IPersistenceSearch {
 
 
     @Override
-    public Curso getSingleCurso(String nameCurso) {
-        return searchCourseCRUD.findByName(nameCurso);
+    public Curso searchCourse(String nameCurso) {
+        return searchCourseCRUD.searchCourse(nameCurso);
     }
 
     @Override
@@ -46,21 +46,21 @@ public class CourseSearchDBImplementation implements IPersistenceSearch {
 
     @Override
     public List<Curso> getCursoThatMatchString(String nameCurso) {
-        return searchCourseCRUD.findByNameContaining(nameCurso);
+        return searchCourseCRUD.getCursoThatMatchString(nameCurso);
     }
 
     @Override
     public List<Curso> getCursoByLevel(CursoLevels level) {
-        return searchCourseCRUD.findByLevel(level);
+        return searchCourseCRUD.getCursoByLevel(level);
     }
 
     @Override
     public List<Curso> getCursoByNameAndByLevel(String nameCurso, CursoLevels level) {
-        return searchCourseCRUD.findByNameAndLevel(nameCurso, level);
+        return searchCourseCRUD.getCursoByNameAndByLevel(nameCurso, level);
     }
 
     @Override
     public List<Curso> getCursoBetweenTwoExpirationDate(LocalDate startDate, LocalDate endDate) {
-        return searchCourseCRUD.findByExpirationDateBetween(startDate, endDate);
+        return searchCourseCRUD.getCursoBetweenTwoExpirationDate(startDate, endDate);
     }
 }

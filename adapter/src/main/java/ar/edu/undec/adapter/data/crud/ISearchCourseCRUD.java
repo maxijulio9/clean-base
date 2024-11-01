@@ -18,11 +18,11 @@ public interface ISearchCourseCRUD extends CrudRepository<CourseData, UUID> {
 
     List<Curso> getAllCursos();
 
-    List<Curso> findByNameContaining(String nameCurso);
+    List<Curso> getCursoThatMatchString(String nameCurso);
 
-    List<Curso> findByLevel(CursoLevels level);
+    List<Curso> getCursoByLevel(CursoLevels level);
 
-    List<Curso> findByNameAndLevel(String nameCurso, CursoLevels level);
+    List<Curso> getCursoByNameAndByLevel(String nameCurso, CursoLevels level);
 
-    List<Curso> findByExpirationDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Curso> getCursoBetweenTwoExpirationDate(LocalDate startDate, LocalDate endDate);
 }
