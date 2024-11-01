@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface ICreateCourseCRUD extends CrudRepository<CourseData, UUID> {
-    Optional<CourseData> existsCourseByName(String name);
+    Boolean existsCourseByName(String name);
 }

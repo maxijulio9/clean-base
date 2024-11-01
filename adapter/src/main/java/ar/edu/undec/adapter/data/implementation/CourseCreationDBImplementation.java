@@ -19,21 +19,17 @@ public class CourseCreationDBImplementation implements IPersistenceCreation {
 
     @Override
     public boolean existsCurso(String nameCurso) {
-        //funcionalidad buscar cursio por id
-        return createCourseCRUD.existsCourseByName(nameCurso).equals(true);
-
+        //funcionalidad buscar cursio por nombrer
+        return createCourseCRUD.existsCourseByName(nameCurso);
     }
 
     @Override
     public boolean saveCurso(Curso cursoCore) {
-
-        CourseData courseData = new CourseData();
-        courseData.setName(cursoCore.getName());
-        courseData.setLevel(cursoCore.getLevel());
-        courseData.setDateExpirationInscription(cursoCore.getDateExpirationInscription());
-
-        this.createCourseCRUD.save(courseData);
-        return true;
-
+        try {
+            this.createCourseCRUD.save(CourseData.fromDomain(cursoCore));
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
     }
 }

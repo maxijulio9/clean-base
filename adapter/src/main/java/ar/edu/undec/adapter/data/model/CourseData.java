@@ -1,6 +1,7 @@
 package ar.edu.undec.adapter.data.model;
 
 import curso.input.ICreateCursoInput;
+import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +32,12 @@ public class CourseData {
         this.name = name;
         this.level = level;
         this.dateExpirationInscription = dateExpirationInscription;
+    }
+
+    public static CourseData fromDomain(Curso coreCourse){
+        return new CourseData(coreCourse.getId(),coreCourse.getName()
+                ,coreCourse.getLevel(),
+                coreCourse.getDateExpirationInscription());
     }
 
 
