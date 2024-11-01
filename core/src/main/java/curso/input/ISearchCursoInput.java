@@ -9,14 +9,15 @@ import java.util.List;
 public interface ISearchCursoInput {
 
     Curso searchCurso(String nameCurso);
-    //Curso searchSingleCourse(String nameCurso);
 
-//    List<Curso> searchForCoursesThatMatchAString(String criteria);
+    List<Curso> getAllCursos();
 
-  //  List<Curso> searchCoursesByLevel(CursoLevels level);
+    List<Curso> getCursoThatMatchString(String nameCurso);
 
-    //List<Curso> searchCoursesByExpirationDateInscription(LocalDate expirationDate);
+    List<Curso> getCursoByLevel(CursoLevels level);
 
-  //  List<Curso> searchCoursesBetweenExpirationDateInscription(LocalDate expirationDate);
+    List<Curso> getCursoByNameAndByLevel(String nameCurso, CursoLevels level);
+
+    List<Curso> getCursoBetweenTwoExpirationDate(LocalDate startDate, LocalDate endDate);
 
 }

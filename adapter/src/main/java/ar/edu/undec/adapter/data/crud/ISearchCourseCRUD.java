@@ -14,7 +14,7 @@ import java.util.UUID;
 public interface ISearchCourseCRUD extends CrudRepository<CourseData, UUID> {
     boolean searchCourseByName(String name);
 
-    Curso findByName(String nameCurso);
+    Curso searchCourse(String nameCurso);
 
     List<Curso> getAllCursos();
 
