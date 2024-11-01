@@ -21,6 +21,7 @@ public class CreateCourseController {
     @PostMapping
     public ResponseEntity<?> createCourse(@RequestBody CourseDTO courseDTO) {
 
+
         try {
             Curso courseCreated = createCursoInput.createCurso(
                     courseDTO.getId(),

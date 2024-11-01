@@ -15,7 +15,7 @@ public class CourseDTO {
     @JsonProperty("id")
     private UUID id;
 
-    @JsonProperty("inscription_deadline")
+    @JsonProperty("dateexpirationinscriptioncourse")
     private LocalDate dateExpirationInscription;
 
     @JsonProperty("level")
