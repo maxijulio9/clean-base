@@ -40,6 +40,10 @@ public class CourseData {
                 coreCourse.getDateExpirationInscription());
     }
 
+    public Curso toDomain() {
+        return  Curso.getInstance(this.name, this.level, this.dateExpirationInscription);
+    }
+
 
     public UUID getId() {
         return id;
