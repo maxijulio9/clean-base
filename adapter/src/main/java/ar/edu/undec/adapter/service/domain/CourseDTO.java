@@ -21,8 +21,8 @@ public class CourseDTO {
     @JsonProperty("level")
     private CursoLevels level;
 
-    @JsonProperty("course_name")
-    private String courseName;
+    @JsonProperty("name")
+    private String name;
 
     public CourseDTO() {}
 
@@ -30,7 +30,7 @@ public class CourseDTO {
         this.id = id;
         this.dateExpirationInscription = dateExpirationInscription;
         this.level = level;
-        this.courseName = courseName;
+        this.name = courseName;
     }
     public static CourseDTO getInstanceDTO(UUID id,String courseName,  CursoLevels level,LocalDate dateExpirationInscription){
         return new CourseDTO(id,courseName,level,dateExpirationInscription);
@@ -65,11 +65,11 @@ public class CourseDTO {
     }
 
     public String getName() {
-        return courseName;
+        return name;
     }
 
     public void setName(String courseName) {
-        this.courseName = courseName;
+        this.name = courseName;
     }
 
 }
