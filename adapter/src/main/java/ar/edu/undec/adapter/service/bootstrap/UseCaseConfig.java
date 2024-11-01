@@ -12,7 +12,6 @@ public class UseCaseConfig {
     @Bean
     public ICreateCursoInput createCourseInput(IPersistenceCreation myDB){
         return new CursoCreateUseCase(myDB);
-
     }
 
 }

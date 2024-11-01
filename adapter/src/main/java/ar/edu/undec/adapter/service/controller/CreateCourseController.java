@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/course")
 public class CreateCourseController {
 
-    private final ICreateCursoInput createCursoInput;
+    private  ICreateCursoInput createCursoInput;
 
     @Autowired
     public CreateCourseController(ICreateCursoInput createCursoInput) {

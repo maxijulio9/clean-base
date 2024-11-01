@@ -2,6 +2,7 @@ package ar.edu.undec.adapter.service.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
 
 import java.time.LocalDate;
@@ -30,6 +31,10 @@ public class CourseDTO {
         this.dateExpirationInscription = dateExpirationInscription;
         this.level = level;
         this.courseName = courseName;
+    }
+
+    public static Curso toDomain(CourseDTO course){
+        return Curso.getInstance(course.getName(),course.getLevel(),course.getDateExpirationInscription());//etc
     }
 
     public UUID getId() {
