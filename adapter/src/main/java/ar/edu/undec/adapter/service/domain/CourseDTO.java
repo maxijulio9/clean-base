@@ -26,11 +26,14 @@ public class CourseDTO {
 
     public CourseDTO() {}
 
-    public CourseDTO(UUID id,  String courseName,  CursoLevels level,LocalDate dateExpirationInscription) {
+    private CourseDTO(UUID id,  String courseName,  CursoLevels level,LocalDate dateExpirationInscription) {
         this.id = id;
         this.dateExpirationInscription = dateExpirationInscription;
         this.level = level;
         this.courseName = courseName;
+    }
+    public static CourseDTO getInstanceDTO(UUID id,String courseName,  CursoLevels level,LocalDate dateExpirationInscription){
+        return new CourseDTO(id,courseName,level,dateExpirationInscription);
     }
 
     public static Curso toDomain(CourseDTO course){

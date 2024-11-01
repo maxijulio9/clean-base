@@ -33,10 +33,12 @@ public class CursoSearchUseCase implements ISearchCursoInput {
         return searchCurso(nameCurso);
     }
 
+    @Override
     public List<Curso> getAllCursos() {
         return myDB.getAllCursos();
     }
 
+    @Override
     public List<Curso> getCursoThatMatchString(String nameCurso) {
         cursoValidationService.validateCursoExistence(nameCurso);
         return myDB.getCursoThatMatchString(nameCurso);
