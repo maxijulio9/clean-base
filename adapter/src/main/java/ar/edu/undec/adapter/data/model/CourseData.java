@@ -41,7 +41,7 @@ public class CourseData {
     }
 
     public Curso toDomain() {
-        return  Curso.getInstance(this.name, this.level, this.dateExpirationInscription);
+        return  Curso.getInstance(this.id, this.name, this.level, this.dateExpirationInscription);
     }
 
 
