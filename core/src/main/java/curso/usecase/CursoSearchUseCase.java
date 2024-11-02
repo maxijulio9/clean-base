@@ -27,16 +27,18 @@ public class CursoSearchUseCase implements ISearchCursoInput {
     public Curso searchCurso(String nameCurso) throws ExceptionCursonNonExistence {
 
         if (!myDB.existsCurso(nameCurso)) throw new ExceptionCursonNonExistence("No se encontraron resultados para '"+nameCurso+"'");
-        return myDB.getSingleCurso(nameCurso);
+        return myDB.searchCourse(nameCurso);
     }
     public Curso getSingleCurso(String nameCurso) throws ExceptionCursonNonExistence {
         return searchCurso(nameCurso);
     }
 
+    @Override
     public List<Curso> getAllCursos() {
         return myDB.getAllCursos();
     }
 
+    @Override
     public List<Curso> getCursoThatMatchString(String nameCurso) {
         cursoValidationService.validateCursoExistence(nameCurso);
         return myDB.getCursoThatMatchString(nameCurso);

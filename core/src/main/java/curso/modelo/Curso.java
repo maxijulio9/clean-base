@@ -12,10 +12,7 @@ import java.util.UUID;
 public class Curso {
     UUID id;
     String name;
- //   Integer studentQuantity;
-   // Integer hoursQuantity;
     CursoLevels level;
-    //String teacherAssigned;
     LocalDate dateExpirationInscription;
 
   //  ICreateCursoInput cursoCreateInput;
@@ -23,18 +20,28 @@ public class Curso {
     private Curso(String name,  CursoLevels levels, LocalDate dateCloseInscription ){
         this.id = UUID.randomUUID();
         this.name = name;
-        //this.studentQuantity = studentQuantity;
-        //this.hoursQuantity = hoursQuantity;
         this.level = levels;
-        //this.teacherAssigned = teacherAssigned;
         this.dateExpirationInscription = dateCloseInscription;
     }
 
+    private Curso(UUID id,String name,  CursoLevels levels, LocalDate dateCloseInscription ){
+        this.id = id;
+        this.name = name;
+        this.level = levels;
+        this.dateExpirationInscription = dateCloseInscription;
+    }
     public static Curso getInstance(String name, CursoLevels level, LocalDate dateExpirationInscription) {
         Util.validatedateExpirationInscription(dateExpirationInscription,"El curso que intentas registrar tiene fecha de inscripción inválida." );
         Util.validateEmptyString(name, "El nombre del curso no puede estar vacío.");
         Util.validateLevel(level, "El curso que intentas registrar tiene un nivel inválido.");
         return new Curso(name,  level,dateExpirationInscription);
+    }
+    public static Curso getInstance(UUID id,String name, CursoLevels level, LocalDate dateExpirationInscription) {
+
+        Util.validatedateExpirationInscription(dateExpirationInscription,"El curso que intentas registrar tiene fecha de inscripción inválida." );
+        Util.validateEmptyString(name, "El nombre del curso no puede estar vacío.");
+        Util.validateLevel(level, "El curso que intentas registrar tiene un nivel inválido.");
+        return new Curso(id,name,  level,dateExpirationInscription);
     }
 
     public UUID getId() {

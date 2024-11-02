@@ -4,10 +4,8 @@ import curso.exception.ExceptionCursonNonExistence;
 import curso.modelo.Curso;
 import curso.modelo.CursoLevels;
 
-import curso.output.IPersistence;
 import curso.output.IPersistenceCreation;
 import curso.output.IPersistenceSearch;
-import curso.usecase.CursoCreateUseCase;
 import curso.usecase.CursoSearchUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -59,12 +57,12 @@ public class TestSearchCursoUseCase {
         when(cursitoMock.getName()).thenReturn("Criptografia");
 
         when(myDB.existsCurso("Criptografia")).thenReturn(true);
-        when(myDB.getSingleCurso("Criptografia")).thenReturn(cursitoMock);
+        when(myDB.searchCourse("Criptografia")).thenReturn(cursitoMock);
 
        // Assertions.assertEquals(cursito.getName(), searchCursoUseCase.getSingleCurso("Criptografia").getName());
         Assertions.assertEquals(cursitoMock.getName(), searchCursoUseCase.getSingleCurso("Criptografia").getName());
 
-        Mockito.verify(myDB, Mockito.times(1)).getSingleCurso("Criptografia");
+        Mockito.verify(myDB, Mockito.times(1)).searchCourse("Criptografia");
         Mockito.verify(myDB, Mockito.times(1)).existsCurso("Criptografia");
     }
 
