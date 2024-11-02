@@ -60,6 +60,7 @@ public class SearchCourseController {
     @GetMapping(path = "/findByNameContaining/{nameletter}")
     public ResponseEntity<?> findByNameContaining(@PathVariable(name =  "nameletter") String nameletter) {
         try {
+            System.out.println(nameletter);
             System.out.println("CURSOS OBTENIDOS:");
 
             List<Curso> cursos = searchCursoInput.getCursoThatMatchString(nameletter);

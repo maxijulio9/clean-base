@@ -57,12 +57,12 @@ public class TestSearchCursoUseCase {
         when(cursitoMock.getName()).thenReturn("Criptografia");
 
         when(myDB.existsCurso("Criptografia")).thenReturn(true);
-        when(myDB.getSingleCurso("Criptografia")).thenReturn(cursitoMock);
+        when(myDB.searchCourse("Criptografia")).thenReturn(cursitoMock);
 
        // Assertions.assertEquals(cursito.getName(), searchCursoUseCase.getSingleCurso("Criptografia").getName());
         Assertions.assertEquals(cursitoMock.getName(), searchCursoUseCase.getSingleCurso("Criptografia").getName());
 
-        Mockito.verify(myDB, Mockito.times(1)).getSingleCurso("Criptografia");
+        Mockito.verify(myDB, Mockito.times(1)).searchCourse("Criptografia");
         Mockito.verify(myDB, Mockito.times(1)).existsCurso("Criptografia");
     }
 

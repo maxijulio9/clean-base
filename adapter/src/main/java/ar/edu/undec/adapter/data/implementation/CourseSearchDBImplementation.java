@@ -27,7 +27,7 @@ public class CourseSearchDBImplementation implements IPersistenceSearch {
 
     @Override
     public boolean existsCurso(String nameCurso) {
-        return searchCourseCRUD.existsCourseByName(nameCurso);
+        return !searchCourseCRUD.existsCourseByName(nameCurso);
     }
 
 

@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static org.mockito.Mockito.when;
 
@@ -28,7 +29,7 @@ public class TestCreateCursoUseCase {
         CursoCreateUseCase cursoCreateUseCase = new CursoCreateUseCase(myDB);
 
       //  when(myDB.existsCurso("")).thenReturn(false);
-        Assertions.assertThrows(ExceptionCourseEmptyString.class, () -> cursoCreateUseCase.createCurso("   ", CursoLevels.MEDIO,LocalDate.now().plusYears(1)));
+        Assertions.assertThrows(ExceptionCourseEmptyString.class, () -> cursoCreateUseCase.createCurso(UUID.randomUUID(), "   ", CursoLevels.MEDIO,LocalDate.now().plusYears(1)));
 
     }
     @Test
@@ -36,7 +37,7 @@ public class TestCreateCursoUseCase {
         CursoCreateUseCase cursoCreateUseCase = new CursoCreateUseCase(myDB);
 
         //  when(myDB.existsCurso("")).thenReturn(false);
-        Assertions.assertDoesNotThrow(() -> cursoCreateUseCase.createCurso("  a  ", CursoLevels.MEDIO, LocalDate.now().plusYears(1)));
+        Assertions.assertDoesNotThrow(() -> cursoCreateUseCase.createCurso(UUID.randomUUID(), "  a  ", CursoLevels.MEDIO, LocalDate.now().plusYears(1)));
 
     }
 
@@ -47,7 +48,7 @@ public class TestCreateCursoUseCase {
         when(myDB.existsCurso("Matematicas")).thenReturn(true);
 
         Assertions.assertThrows(ExceptionCursoWithTheSameName.class
-                , () -> curso.createCurso("Matematicas", CursoLevels.INICIAL,LocalDate.now().plusYears(1)));
+                , () -> curso.createCurso(UUID.randomUUID(), "Matematicas", CursoLevels.INICIAL,LocalDate.now().plusYears(1)));
 
     }
     @Test
@@ -56,7 +57,7 @@ public class TestCreateCursoUseCase {
 
         when(myDB.existsCurso("Programación")).thenReturn(false);
 
-        Curso cursito = curso.createCurso("Programación", CursoLevels.MEDIO,LocalDate.now().plusDays(1));
+        Curso cursito = curso.createCurso(UUID.randomUUID(), "Programación", CursoLevels.MEDIO,LocalDate.now().plusDays(1));
 
         Assertions.assertEquals("Programación",cursito.getName());
     }
@@ -66,7 +67,7 @@ public class TestCreateCursoUseCase {
         CursoCreateUseCase curso = new CursoCreateUseCase(myDB);
         when(myDB.existsCurso("Cálculo estádistico")).thenReturn(false);
 
-        Assertions.assertDoesNotThrow(() -> curso.createCurso("Cálculo estádistico", CursoLevels.INICIAL, LocalDate.now().plusYears(1)));
+        Assertions.assertDoesNotThrow(() -> curso.createCurso(UUID.randomUUID(), "Cálculo estádistico", CursoLevels.INICIAL, LocalDate.now().plusYears(1)));
         Mockito.verify(myDB).existsCurso("Cálculo estádistico");
 
     }
@@ -76,7 +77,7 @@ public class TestCreateCursoUseCase {
 
         when(myDB.existsCurso("Física nuclear")).thenReturn(false);
 
-       Curso cursito = Assertions.assertDoesNotThrow(() -> curso.createCurso("Física nuclear", CursoLevels.INICIAL,LocalDate.now().plusYears(1)));
+       Curso cursito = Assertions.assertDoesNotThrow(() -> curso.createCurso(UUID.randomUUID(), "Física nuclear", CursoLevels.INICIAL,LocalDate.now().plusYears(1)));
 
         Assertions.assertEquals("Física nuclear", cursito.getName());
 
@@ -100,7 +101,7 @@ public class TestCreateCursoUseCase {
          //when(myDB.existsCurso("Programación")).thenReturn(false);
 
          Assertions.assertThrows(ExceptionCursoWithAInscriptionDateInvalid.class,
-                 () -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.of(2024,03,1)));
+                 () -> curso.createCurso(UUID.randomUUID(), "Programación", CursoLevels.MEDIO, LocalDate.of(2024,03,1)));
 
          Mockito.verify(myDB, Mockito.never()).existsCurso("Programación");
         Mockito.verify(myDB, Mockito.never()).saveCurso(Mockito.any(Curso.class));
@@ -110,7 +111,7 @@ public class TestCreateCursoUseCase {
     void CourseWithADateBeforeToCurrentDateDoesNotThrowException(){
         CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
 
-        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO,LocalDate.now().plusYears(1)));
+        Assertions.assertDoesNotThrow(() -> curso.createCurso(UUID.randomUUID(), "Programación", CursoLevels.MEDIO,LocalDate.now().plusYears(1)));
 
         Mockito.verify(myDB, Mockito.times(1)).saveCurso(Mockito.any(Curso.class));
         Mockito.verify(myDB).saveCurso(Mockito.any(Curso.class));
@@ -120,8 +121,8 @@ public class TestCreateCursoUseCase {
     void CourseWithAInvalidLevelThrowException(){
         CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
 
-        Assertions.assertThrows(ExceptionCursoWithAInvalidLevel.class,() -> curso.createCurso("Programación", CursoLevels.SUPERSAYAYIN, LocalDate.now().plusYears(1)));
-        Assertions.assertThrows(ExceptionCursoWithAInvalidLevel.class,() -> curso.createCurso("Programación", null, LocalDate.now().plusYears(1)));
+        Assertions.assertThrows(ExceptionCursoWithAInvalidLevel.class,() -> curso.createCurso(UUID.randomUUID(), "Programación", CursoLevels.SUPERSAYAYIN, LocalDate.now().plusYears(1)));
+        Assertions.assertThrows(ExceptionCursoWithAInvalidLevel.class,() -> curso.createCurso(UUID.randomUUID(), "Programación", null, LocalDate.now().plusYears(1)));
 
         Mockito.verify(myDB, Mockito.never()).existsCurso("Programación");
         Mockito.verify(myDB, Mockito.never()).saveCurso(Mockito.any(Curso.class));
@@ -132,7 +133,7 @@ public class TestCreateCursoUseCase {
     void CourseWithAValidLevelDoesNotThrowException(){
         CursoCreateUseCase curso =  new CursoCreateUseCase(myDB);
 
-        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.now().plusYears(1)));
+        Assertions.assertDoesNotThrow(() -> curso.createCurso(UUID.randomUUID(), "Programación", CursoLevels.MEDIO, LocalDate.now().plusYears(1)));
         Mockito.verify(myDB).existsCurso("Programación");
 
     }
@@ -145,7 +146,7 @@ public class TestCreateCursoUseCase {
 
         when(myDB.saveCurso(Mockito.any(Curso.class))).thenReturn(true);
 
-        Assertions.assertDoesNotThrow(() -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.now().plusYears(1)));
+        Assertions.assertDoesNotThrow(() -> curso.createCurso(UUID.randomUUID(), "Programación", CursoLevels.MEDIO, LocalDate.now().plusYears(1)));
 
         Mockito.verify(myDB).existsCurso("Programación");
         Mockito.verify(myDB).saveCurso(Mockito.any(Curso.class));
@@ -159,7 +160,7 @@ public class TestCreateCursoUseCase {
 
         //when(myDB.saveCurso(Mockito.any(Curso.class))).thenThrow(ExceptionCursoErrorSavingInDB.class);
 
-        Assertions.assertThrows(ExceptionCursoWithTheSameName.class,  () -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.now().plusYears(1)));
+        Assertions.assertThrows(ExceptionCursoWithTheSameName.class,  () -> curso.createCurso(UUID.randomUUID(), "Programación", CursoLevels.MEDIO, LocalDate.now().plusYears(1)));
 
         Mockito.verify(myDB).existsCurso("Programación");
         Mockito.verify(myDB, Mockito.never()).saveCurso(Mockito.any(Curso.class));
@@ -174,7 +175,7 @@ public class TestCreateCursoUseCase {
 
         when(myDB.saveCurso(Mockito.any(Curso.class))).thenThrow(ExceptionCursoErrorSavingInDB.class);
 
-        Assertions.assertThrows(ExceptionCursoErrorSavingInDB.class, () -> curso.createCurso("Programación", CursoLevels.MEDIO, LocalDate.now().plusYears(1)));
+        Assertions.assertThrows(ExceptionCursoErrorSavingInDB.class, () -> curso.createCurso(UUID.randomUUID(), "Programación", CursoLevels.MEDIO, LocalDate.now().plusYears(1)));
 
         Mockito.verify(myDB).existsCurso("Programación");
         Mockito.verify(myDB, Mockito.times(1)).saveCurso(Mockito.any(Curso.class));
