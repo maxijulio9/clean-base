@@ -11,7 +11,7 @@ public class CursoValidationService {
     }
 
     public void validateCursoExistence(String nameCurso) throws ExceptionCursonNonExistence {
-        if (!persistence.existsCurso(nameCurso)) {
+        if (persistence.existsCurso(nameCurso)) {
             throw new ExceptionCursonNonExistence("No se encontraron resultados para '" + nameCurso + "'");
         }
     }

@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping("course")
 public class SearchCourseController {
 
+
     private ISearchCursoInput searchCursoInput;
 
     @Autowired
@@ -59,14 +60,20 @@ public class SearchCourseController {
     @GetMapping(path = "/findByNameContaining/{nameletter}")
     public ResponseEntity<?> findByNameContaining(@PathVariable(name =  "nameletter") String nameletter) {
         try {
+            System.out.println("CURSOS OBTENIDOS:");
+
             List<Curso> cursos = searchCursoInput.getCursoThatMatchString(nameletter);
+            System.out.println("CURSOS OBTENIDOS 2:");
+            cursos.stream().forEach(c -> System.out.println(c.getName()));
+
             List<CourseDTO> cursosDTOs = cursos.stream()
                     .map(curso -> CourseDTO.getInstanceDTO(curso.getId(), curso.getName(), curso.getLevel(), curso.getDateExpirationInscription()))
                     .collect(Collectors.toList());
 
             return ResponseEntity.ok(cursosDTOs);
         }catch(Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            //return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body("Sin resultados");
         }
     }
 

@@ -17,6 +17,7 @@ import java.util.List;
 public class CourseSearchDBImplementation implements IPersistenceSearch {
 
 
+    @Autowired
     ISearchCourseCRUD searchCourseCRUD;
 
     @Autowired
@@ -56,7 +57,7 @@ public class CourseSearchDBImplementation implements IPersistenceSearch {
             cursos.add(curso);
         });
 
-
+        cursos.stream().forEach(c -> System.out.println(c.getName()));
         return cursos;
     }
 

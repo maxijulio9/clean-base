@@ -12,7 +12,7 @@ import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CourseDTO {
 
-    @JsonProperty("id")
+    @JsonProperty("idcurso")
     private UUID id;
 
     @JsonProperty("dateexpirationinscriptioncourse")
