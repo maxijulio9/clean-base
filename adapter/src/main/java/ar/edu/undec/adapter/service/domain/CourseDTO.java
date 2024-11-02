@@ -44,32 +44,17 @@ public class CourseDTO {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public LocalDate getDateExpirationInscription() {
         return dateExpirationInscription;
-    }
-
-    public void setDateExpirationInscription(LocalDate inscriptionDeadline) {
-        this.dateExpirationInscription = inscriptionDeadline;
     }
 
     public CursoLevels getLevel() {
         return level;
     }
 
-    public void setLevel(CursoLevels level) {
-        this.level = level;
-    }
-
     public String getName() {
         return name;
-    }
 
-    public void setName(String courseName) {
-        this.name = courseName;
     }
 
 }
