@@ -1,5 +1,6 @@
 package ar.edu.undec.adapter.service.controller;
 
+import ar.edu.undec.adapter.data.crud.ISearchCourseCRUD;
 import ar.edu.undec.adapter.service.domain.CourseDTO;
 import curso.input.ISearchCursoInput;
 import curso.modelo.Curso;
@@ -16,18 +17,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("courses")
+@RequestMapping("course")
 public class SearchCourseController {
 
     private ISearchCursoInput searchCursoInput;
 
     @Autowired
     public SearchCourseController(ISearchCursoInput searchCursoInput) {
+
         this.searchCursoInput = searchCursoInput;
     }
 
-    @GetMapping(path = "/{name}")
-    public ResponseEntity<?> searchCurso(@PathVariable String name) {
+    @GetMapping(path = "/findByName/{name}")
+    public ResponseEntity<?> searchCurso(@PathVariable(name = "name") String name) {
         try {
             Curso curso = searchCursoInput.searchCurso(name);
             CourseDTO   courseDTO = CourseDTO.getInstanceDTO(curso.getId(),curso.getName(),
@@ -38,8 +40,8 @@ public class SearchCourseController {
         }
     }
 
-    @GetMapping(path = "/findByName/allcourses")
-    public ResponseEntity<?> searchAllCourses() {
+    @GetMapping(path = "/allcourses")
+    public ResponseEntity<?> getAllCursos() {
         try {
             List<Curso> cursos = searchCursoInput.getAllCursos();
             //cocnveritmos a dtos todos
@@ -53,10 +55,11 @@ public class SearchCourseController {
         }
     }
 
+    //THIS isnottt workjinhng!!!!!!!!!!!!"Ñ;####
     @GetMapping(path = "/findByNameContaining/{nameletter}")
-    public ResponseEntity<?> findByNameContaining(@PathVariable String nameLetter) {
+    public ResponseEntity<?> findByNameContaining(@PathVariable(name =  "nameletter") String nameletter) {
         try {
-            List<Curso> cursos = searchCursoInput.getCursoThatMatchString(nameLetter);
+            List<Curso> cursos = searchCursoInput.getCursoThatMatchString(nameletter);
             List<CourseDTO> cursosDTOs = cursos.stream()
                     .map(curso -> CourseDTO.getInstanceDTO(curso.getId(), curso.getName(), curso.getLevel(), curso.getDateExpirationInscription()))
                     .collect(Collectors.toList());
@@ -68,7 +71,7 @@ public class SearchCourseController {
     }
 
     @GetMapping(path = "/findByLevel/{level}")
-    public ResponseEntity<?> findByLevel(@PathVariable CursoLevels level) {
+    public ResponseEntity<?> findByLevel(@PathVariable (name =  "level") CursoLevels level) {
         try {
             List<Curso> cursos = searchCursoInput.getCursoByLevel(level);
             List<CourseDTO> cursosDTOs = cursos.stream()
@@ -82,7 +85,7 @@ public class SearchCourseController {
     }
 
     @GetMapping(path = "/findByNameAndLevel/{name}/{level}")
-    public ResponseEntity<?> findByNameAndLevel(@PathVariable String name ,@PathVariable CursoLevels level) {
+    public ResponseEntity<?> findByNameAndLevel(@PathVariable(name =  "name") String name ,@PathVariable (name =  "level") CursoLevels level) {
         try {
             List<Curso> cursos = searchCursoInput.getCursoByNameAndByLevel(name ,level);
             List<CourseDTO> cursosDTOs = cursos.stream()
@@ -96,7 +99,7 @@ public class SearchCourseController {
     }
 
     @GetMapping(path = "/findByExpirationDateBetween/{startdate}/{duedate}")
-    public ResponseEntity<?> findByExpirationDateBetween(@PathVariable LocalDate startdate, @PathVariable LocalDate duedate) {
+    public ResponseEntity<?> findByExpirationDateBetween(@PathVariable(name =  "startdate") LocalDate startdate, @PathVariable(name =  "duedate") LocalDate duedate) {
         try {
             List<Curso> cursos = searchCursoInput.getCursoBetweenTwoExpirationDate(startdate,duedate);
             List<CourseDTO> cursosDTOs = cursos.stream()

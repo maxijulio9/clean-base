@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IPersistenceSearch {
     boolean existsCurso(String nameCurso);
-    Curso getSingleCurso(String nameCurso);
+    Curso searchCourse(String nameCurso);
     List<Curso> getAllCursos();
     List<Curso> getCursoThatMatchString(String nameCurso);
     List<Curso> getCursoByLevel(CursoLevels level);

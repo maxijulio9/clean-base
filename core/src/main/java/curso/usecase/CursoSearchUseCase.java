@@ -27,7 +27,7 @@ public class CursoSearchUseCase implements ISearchCursoInput {
     public Curso searchCurso(String nameCurso) throws ExceptionCursonNonExistence {
 
         if (!myDB.existsCurso(nameCurso)) throw new ExceptionCursonNonExistence("No se encontraron resultados para '"+nameCurso+"'");
-        return myDB.getSingleCurso(nameCurso);
+        return myDB.searchCourse(nameCurso);
     }
     public Curso getSingleCurso(String nameCurso) throws ExceptionCursonNonExistence {
         return searchCurso(nameCurso);

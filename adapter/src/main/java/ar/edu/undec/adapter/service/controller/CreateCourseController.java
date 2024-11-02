@@ -23,13 +23,18 @@ public class CreateCourseController {
 
 
         try {
+            System.out.println(courseDTO.getId()+""+
+                    courseDTO.getName()+""+
+                    courseDTO.getLevel()+""+
+                    courseDTO.getDateExpirationInscription());
             Curso courseCreated = createCursoInput.createCurso(
                     courseDTO.getId(),
                     courseDTO.getName(),
                     courseDTO.getLevel(),
                     courseDTO.getDateExpirationInscription()
             );
-            return ResponseEntity.ok().build();
+
+            return ResponseEntity.ok().body("Curso creado exitosamente");
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
