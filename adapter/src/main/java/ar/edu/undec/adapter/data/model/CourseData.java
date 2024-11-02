@@ -49,32 +49,18 @@ public class CourseData {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+  
     public CursoLevels getLevel() {
         return level;
     }
 
-    public void setLevel(CursoLevels level) {
-        this.level = level;
-    }
-
     public LocalDate getDateExpirationInscription() {
         return dateExpirationInscription;
-    }
-
-    public void setDateExpirationInscription(LocalDate dateExpirationInscription) {
-        this.dateExpirationInscription = dateExpirationInscription;
     }
 
 }
